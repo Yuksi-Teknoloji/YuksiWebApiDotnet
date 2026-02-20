@@ -1,7 +1,6 @@
-﻿namespace Yuksi.Application.Features.Auth.Login
-{
-    public sealed record LoginCommandResponse(
-        string Token,
-        string RefreshToken,
-        DateTime RefreshTokenExpires);
-}
+﻿namespace Yuksi.Application.Features.Auth.Login;
+
+public sealed record LoginCommandResponse(
+    string Token,
+    string RefreshToken,
+    DateTime RefreshTokenExpires);

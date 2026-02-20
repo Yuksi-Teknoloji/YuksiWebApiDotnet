@@ -1,9 +1,8 @@
 ﻿using MediatR;
 using TS.Result;
 
-namespace Yuksi.Application.Features.Auth.Login
-{
-    public sealed record LoginCommand(
-        string EmailOrUserName,
-        string Password) : IRequest<Result<LoginCommandResponse>>;
-}
+namespace Yuksi.Application.Features.Auth.Login;
+
+public sealed record LoginCommand(
+    string EmailOrUserName,
+    string Password) : IRequest<Result<LoginCommandResponse>>;

@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Yuksi/Yuksi.Application/Yuksi.Application.csproj" />
+  <Project Path="Yuksi/Yuksi.Domain/Yuksi.Domain.csproj" />
+  <Project Path="Yuksi/Yuksi.Infrastructure/Yuksi.Infrastructure.csproj" />
+  <Project Path="Yuksi/Yuksi.WebAPI/Yuksi.WebAPI.csproj" />
+</Solution>

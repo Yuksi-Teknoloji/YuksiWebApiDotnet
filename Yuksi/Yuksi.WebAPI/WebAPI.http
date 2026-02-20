@@ -1,0 +1,6 @@
+@Yuksi.WebAPI_HostAddress = http://localhost:5193
+
+GET {{Yuksi.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

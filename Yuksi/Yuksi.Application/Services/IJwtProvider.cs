@@ -1,10 +1,9 @@
 ﻿using Yuksi.Application.Features.Auth.Login;
-using Yuksi.Domain.Entities;
+using Yuksi.Domain;
 
-namespace Yuksi.Application.Services
+namespace Yuksi.Application.Services;
+
+public interface IJwtProvider
 {
-    public interface IJwtProvider
-    {
-        Task<LoginCommandResponse> CreateToken(AppUser user);
-    }
+    Task<LoginCommandResponse> CreateToken(AppUser user);
 }

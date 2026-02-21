@@ -1,4 +1,6 @@
-﻿namespace Yuksi.Domain;
+﻿using Yuksİ.Domain;
+
+namespace Yuksi.Domain;
 
 public partial class VehicleType
 {

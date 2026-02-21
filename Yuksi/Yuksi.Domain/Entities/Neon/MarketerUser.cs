@@ -1,4 +1,6 @@
-﻿namespace Yuksİ.Domain;
+﻿using Yuksi.Domain;
+
+namespace Yuksİ.Domain;
 
 public partial class MarketerUser
 {

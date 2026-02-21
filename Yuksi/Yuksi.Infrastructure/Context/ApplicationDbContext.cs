@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Yuksi.Domain.Entities;
+using Yuksi.Domain;
 
 namespace Yuksi.Infrastructure.Context;
 

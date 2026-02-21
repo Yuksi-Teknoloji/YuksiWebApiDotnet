@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TS.Result;
 using Yuksi.Application.Services;
-using Yuksi.Domain.Entities;
+using Yuksi.Domain;
 
 namespace Yuksi.Application.Features.Auth.Login;
 

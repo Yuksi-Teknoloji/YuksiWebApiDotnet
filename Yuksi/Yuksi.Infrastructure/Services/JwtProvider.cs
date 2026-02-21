@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using Yuksi.Application.Features.Auth.Login;
 using Yuksi.Application.Services;
+using Yuksi.Domain;
 using Yuksi.Infrastructure.Options;
 
 namespace Yuksi.Infrastructure.Services;

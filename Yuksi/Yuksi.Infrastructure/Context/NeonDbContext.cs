@@ -1,7 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using Yuks.Domain;
+using Yuksi.Domain;
 using Yuksi.Domain.Enums;
+using Yuksİ.Domain;
 
 namespace Yuksi.Infrastructure;
 

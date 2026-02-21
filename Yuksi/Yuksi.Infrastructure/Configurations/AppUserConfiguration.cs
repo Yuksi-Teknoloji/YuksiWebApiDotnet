@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Yuksi.Domain.Entities;
-
+using Yuksi.Domain;
 namespace Yuksi.Infrastructure.Configurations;
 
 internal sealed class AppUserConfiguration : IEntityTypeConfiguration<AppUser>

@@ -20,8 +20,22 @@ public class LoginCommandHandlerTest
         var storeMock = new Mock<IUserStore<AppUser>>();
         var userManagerMock = new Mock<UserManager<AppUser>>(storeMock.Object, null, null, null, null, null, null, null, null);
         userManagerMock.SetupGet(u => u.Users).Returns(new List<AppUser> { user }.AsQueryable());
-        var signInManagerMock = new Mock<SignInManager<AppUser>>(userManagerMock.Object, Mock.Of<IHttpContextAccessor>(), Mock.Of<IUserClaimsPrincipalFactory<AppUser>>(), Options.Create(new IdentityOptions()), Mock.Of<ILogger<SignInManager<AppUser>>>(), Mock.Of<IAuthenticationSchemeProvider>(), Mock.Of<IUserConfirmation<AppUser>>());
-        signInManagerMock.Setup(s => s.CheckPasswordSignInAsync(user, "password123", true)).ReturnsAsync(SignInResult.Success);
+
+        var contextAccessorMock = new Mock<IHttpContextAccessor>();
+        var claimsFactoryMock = new Mock<IUserClaimsPrincipalFactory<AppUser>>();
+        var loggerMock = new Mock<ILogger<SignInManager<AppUser>>>();
+        var schemesMock = new Mock<IAuthenticationSchemeProvider>();
+        var userConfirmationMock = new Mock<IUserConfirmation<AppUser>>();
+
+        var signInManagerMock = new Mock<SignInManager<AppUser>>(userManagerMock.Object,
+            contextAccessorMock.Object,
+            claimsFactoryMock.Object,
+            Options.Create(new IdentityOptions()),
+            loggerMock.Object,
+            schemesMock.Object,
+            userConfirmationMock.Object);
+
+        signInManagerMock.Setup(s => s.CheckPasswordSignInAsync(It.IsAny<AppUser>(), "password123", true)).ReturnsAsync(SignInResult.Success);
         var jwtProviderMock = new Mock<IJwtProvider>();
         var expectedResponse = new LoginCommandResponse("token-value", "refresh-value", DateTime.UtcNow.AddHours(1));
         jwtProviderMock.Setup(j => j.CreateToken(user)).ReturnsAsync(expectedResponse);

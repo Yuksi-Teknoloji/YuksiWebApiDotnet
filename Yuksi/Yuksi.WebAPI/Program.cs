@@ -1,6 +1,5 @@
 using DefaultCorsPolicyNugetPackage;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using Yuksi.Application;
 using Yuksi.Infrastructure;
 using Yuksi.WebAPI.Middlewares;
@@ -16,37 +15,45 @@ builder.Services.AddProblemDetails();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(setup =>
+builder.Services.AddSwaggerGen(options =>
 {
-    var jwtSecuritySheme = new OpenApiSecurityScheme
+    options.SwaggerDoc("v1", new OpenApiInfo
     {
-        BearerFormat = "JWT",
-        Name = "JWT Authentication",
-        In = ParameterLocation.Header,
+        Title = "Yuksi API",
+        Version = "v1",
+        Description = "Yuksi Web API - .NET 10"
+    });
+
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
         Type = SecuritySchemeType.Http,
-        Scheme = JwtBearerDefaults.AuthenticationScheme,
-        Description = "Put **_ONLY_** yourt JWT Bearer token on textbox below!",
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Name = "Authorization",
+        Description = "Enter JWT token like: Bearer {your token}"
+    });
 
-        Reference = new OpenApiReference
+    options.AddSecurityRequirement(document =>
+    {
+        return new OpenApiSecurityRequirement
         {
-            Id = JwtBearerDefaults.AuthenticationScheme,
-            Type = ReferenceType.SecurityScheme
-        }
-    };
-
-    setup.AddSecurityDefinition(jwtSecuritySheme.Reference.Id, jwtSecuritySheme);
-
-    setup.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    { jwtSecuritySheme, Array.Empty<string>() }
-                });
+            {
+                new OpenApiSecuritySchemeReference("Bearer"),
+                new List<string>()
+            }
+        };
+    });
 });
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
+    app.UseSwagger(options =>
+    {
+        options.OpenApiVersion = OpenApiSpecVersion.OpenApi3_1;
+    });
     app.UseSwaggerUI();
 }
 
@@ -58,6 +65,6 @@ app.UseExceptionHandler();
 
 app.MapControllers();
 
-ExtensionsMiddleware.CreateFirstUser(app);
+// ExtensionsMiddleware.CreateFirstUser(app);
 
 app.Run();

@@ -2,14 +2,13 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Yuksi.Domain.Entities;
 
-namespace Yuksi.Infrastructure.Configurations
+namespace Yuksi.Infrastructure.Configurations;
+
+internal sealed class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
 {
-    internal sealed class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
+    public void Configure(EntityTypeBuilder<AppUser> builder)
     {
-        public void Configure(EntityTypeBuilder<AppUser> builder)
-        {
-            builder.Property(p => p.FirstName).HasColumnType("varchar(50)");
-            builder.Property(p => p.LastName).HasColumnType("varchar(50)");
-        }
+        builder.Property(p => p.FirstName).HasColumnType("varchar(50)");
+        builder.Property(p => p.LastName).HasColumnType("varchar(50)");
     }
 }

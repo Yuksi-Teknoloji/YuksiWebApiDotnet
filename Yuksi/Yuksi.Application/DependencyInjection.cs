@@ -2,23 +2,22 @@
 using Microsoft.Extensions.DependencyInjection;
 using Yuksi.Application.Behaviors;
 
-namespace Yuksi.Application
+namespace Yuksi.Application;
+
+public static class DependencyInjection
 {
-    public static class DependencyInjection
+    public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        public static IServiceCollection AddApplication(this IServiceCollection services)
+        services.AddAutoMapper(typeof(DependencyInjection).Assembly);
+
+        services.AddMediatR(conf =>
         {
-            services.AddAutoMapper(typeof(DependencyInjection).Assembly);
+            conf.RegisterServicesFromAssemblies(typeof(DependencyInjection).Assembly);
+            conf.AddOpenBehavior(typeof(ValidationBehavior<,>));
+        });
 
-            services.AddMediatR(conf =>
-            {
-                conf.RegisterServicesFromAssemblies(typeof(DependencyInjection).Assembly);
-                conf.AddOpenBehavior(typeof(ValidationBehavior<,>));
-            });
+        services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly);
 
-            services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly);
-
-            return services;
-        }
+        return services;
     }
 }

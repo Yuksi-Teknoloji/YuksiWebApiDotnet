@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿using Microsoft.AspNetCore.Authentication;
-=======
 using Microsoft.AspNetCore.Authentication;
->>>>>>> 1926a62cf0fac93d6e2d7eac5126f84dca2233e1
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
@@ -16,7 +12,7 @@ namespace Yuksi.Test.Features.Auth;
 
 public class LoginCommandHandlerTest
 {
-    // test düzeltildi.
+    // test düzeltildi.Sağlam.
     [Fact]
     public async Task Handle_WithValidCredentials_ReturnsToken()
     {

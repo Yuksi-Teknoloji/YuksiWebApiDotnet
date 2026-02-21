@@ -2805,6 +2805,7 @@ public partial class NeonDbContext : DbContext
 
             entity.HasOne(d => d.Order).WithOne(p => p.OrderWatcher)
                 .HasForeignKey<OrderWatcher>(d => d.OrderId)
+
                 .HasConstraintName("order_watchers_order_id_fkey");
 
             entity.HasOne(d => d.Restaurant).WithMany(p => p.OrderWatchers)

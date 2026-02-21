@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+using Yuks.Domain;
+using Yuksi.Domain;
 using Yuksi.Domain.Enums;
+using Yuksİ.Domain;
+using VehicleFeature = Yuksi.Domain.Enums.VehicleFeature;
 
 namespace Yuksi.Infrastructure;
 
@@ -238,17 +240,17 @@ public partial class NeonDbContext : DbContext
     {
         modelBuilder
             .HasPostgresEnum<ContactMessageStatus>()
-            .HasPostgresEnum("content_type", new[] { "Destek", "Hakkimizda", "Iletisim", "GizlilikPolitikasi", "KullanimKosullari", "KuryeGizlilikSözlesmesi", "KuryeTasiyiciSözlesmesi" })
-            .HasPostgresEnum("courier_doc_type", new[] { "VergiLevhasi", "EhliyetOn", "EhliyetArka", "RuhsatOn", "RuhsatArka", "KimlikOn", "KimlikArka", "SRC", "Psikoteknik", "KBelgesi", "P1Belgesi", "AdliSicil" })
-            .HasPostgresEnum("courier_document_status", new[] { "evrak_bekleniyor", "inceleme_bekleniyor", "eksik_belge", "reddedildi", "onaylandi" })
-            .HasPostgresEnum("courier_order_action", new[] { "kabul_etti", "reddetti" })
-            .HasPostgresEnum("delivery_type", new[] { "yerinde", "paket_servis", "gel_al" })
-            .HasPostgresEnum("doc_type", new[] { "license", "criminal_record", "vehicle_insurance" })
-            .HasPostgresEnum("job_status", new[] { "pending", "accepted", "picked_up", "arrived", "delivered", "cancelled" })
-            .HasPostgresEnum("order_status", new[] { "iptal", "hazirlaniyor", "kurye_cagrildi", "kuryeye_verildi", "yolda", "teslim_edildi", "kuryeye_istek_atildi", "kurye_reddetti", "siparis_havuza_atildi", "konuma_geldim" })
-            .HasPostgresEnum("order_type", new[] { "yerinde", "paket_servis", "gel_al" })
-            .HasPostgresEnum("vehicle_feature", new[] { "cooling", "withSeats", "withoutSeats" })
-            .HasPostgresEnum("vehicle_template", new[] { "motorcycle", "minivan", "panelvan", "kamyonet", "kamyon" })
+            .HasPostgresEnum<ContentType>()
+            .HasPostgresEnum<CourierDocType>()
+            .HasPostgresEnum<CourierDocumentStatus>()
+            .HasPostgresEnum<CourierOrderAction>()
+            .HasPostgresEnum<DeliveryType>()
+            .HasPostgresEnum<DocType>()
+            .HasPostgresEnum<JobStatus>()
+            .HasPostgresEnum<OrderStatus>()
+            .HasPostgresEnum<OrderType>()
+            .HasPostgresEnum<VehicleFeature>()
+            .HasPostgresEnum<VehicleTemplate>()
             .HasPostgresExtension("pgcrypto")
             .HasPostgresExtension("uuid-ossp");
 

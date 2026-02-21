@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Moq;
 using Yuksi.Application.Features.Auth.Login;
 using Yuksi.Application.Services;
@@ -9,6 +12,7 @@ namespace Yuksi.Test.Features.Auth;
 
 public class LoginCommandHandlerTest
 {
+    // test düzeltildi.
     [Fact]
     public async Task Handle_WithValidCredentials_ReturnsToken()
     {

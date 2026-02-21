@@ -1,4 +1,4 @@
-﻿namespace Yuksi.Infrastructure;
+﻿namespace Yuksi.Domain;
 
 public partial class Address
 {

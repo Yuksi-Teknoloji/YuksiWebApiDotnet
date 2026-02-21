@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Yuksi.Infrastructure;
+﻿namespace Yuks.Domain;
 
 public partial class CargoUser
 {

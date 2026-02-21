@@ -106,4 +106,3 @@ Proje bazlı paket özeti
   - `xunit.runner.visualstudio` 3.1.4
   - `Moq` 4.18.4
 
-Eğer README'de eklemek istediğiniz başka detaylar (ör. örnek API çağrıları, CI/CD notları veya environment değişken listesi) varsa söyleyin; ekleyip kaydederim.

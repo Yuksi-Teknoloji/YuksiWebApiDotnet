@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Yuksi.Domain.Entities;
+using Yuksi.Domain;
 
 namespace Yuksi.WebAPI.Middlewares;
 
@@ -16,13 +16,13 @@ public static class ExtensionsMiddleware
                 AppUser user = new()
                 {
                     UserName = "admin",
-                    Email = "admin@admin.com",
-                    FirstName = "Taner",
-                    LastName = "Saydam",
+                    Email = "admin@example.com",
+                    FirstName = "Rıdvan Berat",
+                    LastName = "Calis",
                     EmailConfirmed = true
                 };
 
-                userManager.CreateAsync(user, "1").Wait();
+                userManager.CreateAsync(user, "123456").Wait();
             }
         }
     }

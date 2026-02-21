@@ -1,14 +1,14 @@
-﻿namespace Yuksi.Domain;
+﻿using Yuksi.Domain.Enums;
 
-public partial class CourierDocument
+namespace Yuksi.Domain;
+
+public sealed class CourierDocument
 {
     public Guid Id { get; set; }
-
     public Guid UserId { get; set; }
-
     public Guid FileId { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-
-    public virtual File File { get; set; } = null!;
+    public CourierDocType DocType { get; set; }
+    public DateTimeOffset CreatedAt { get; set; }
+    public CourierDocumentStatus CourierDocumentStatus { get; set; }
+    public File File { get; set; } = null!;
 }

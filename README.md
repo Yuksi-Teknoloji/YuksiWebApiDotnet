@@ -109,6 +109,6 @@ Proje bazlı paket özeti
   - `Moq` 4.18.4
 
 Yazılım olgunluğu / Seniorlik seviyesi
-- Proje: Kıdemli (Senior) seviye yaklaşımlar ve uygulama örnekleri içerir. Mimari seçimler, test kapsaması, bağımlılık yönetimi ve üretim odaklı konfigürasyonlar (telemetri, logging, rate limiting, health checks, background jobs, cache,docker,docker compose) göz önünde bulundurularak hazırlanmıştır.
+- Proje: Kıdemli (Senior) seviye yaklaşımlar ve uygulama örnekleri içerir. Mimari seçimler, test kapsaması, bağımlılık yönetimi ve üretim odaklı konfigürasyonlar (telemetri, logging, rate limiting, health checks, background jobs, cache,signalr,docker,docker compose) göz önünde bulundurularak hazırlanmıştır.
 
 

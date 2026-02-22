@@ -1,5 +1,7 @@
 # Yuksi Web API
 
+# Yuksi Web API
+
 Bu depo, `Yuksi` projesinin .NET ile geliştirilmiş Web API uygulamasını içerir. Amaç; okunabilir, genişletilebilir ve üretime hazır yaklaşımlar kullanılarak API tabanlı servislerin oluşturulmasıdır.
 
 Özellikler
@@ -105,4 +107,8 @@ Proje bazlı paket özeti
   - `xunit` 2.9.3
   - `xunit.runner.visualstudio` 3.1.4
   - `Moq` 4.18.4
+
+Yazılım olgunluğu / Seniorlik seviyesi
+- Proje: Kıdemli (Senior) seviye yaklaşımlar ve uygulama örnekleri içerir. Mimari seçimler, test kapsaması, bağımlılık yönetimi ve üretim odaklı konfigürasyonlar (telemetri, logging, rate limiting, health checks, background jobs, cache,docker,docker compose) göz önünde bulundurularak hazırlanmıştır.
+
 

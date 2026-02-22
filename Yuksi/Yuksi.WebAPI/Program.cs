@@ -1,8 +1,12 @@
 using DefaultCorsPolicyNugetPackage;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Hangfire;
 using Hangfire.PostgreSql;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.OpenApi;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+using Serilog;
+using StackExchange.Redis;
 using System.Text.Json;
 using System.Threading.RateLimiting;
 using Yuksi.Application;
@@ -10,6 +14,14 @@ using Yuksi.Infrastructure;
 using Yuksi.WebAPI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .Enrich.WithEnvironmentName()
+    .WriteTo.Console()
+    .CreateLogger();
+builder.Host.UseSerilog();
 
 builder.Services.AddDefaultCors();
 builder.Services.AddApplication();
@@ -49,6 +61,27 @@ if (!string.IsNullOrEmpty(hangfireConn))
     builder.Services.AddHangfire(config => config.UsePostgreSqlStorage(hangfireConn));
     builder.Services.AddHangfireServer();
 }
+
+var redisConn = builder.Configuration.GetConnectionString("Redis") ?? builder.Configuration["Redis:Connection"];
+if (!string.IsNullOrEmpty(redisConn))
+{
+    builder.Services.AddStackExchangeRedisCache(options =>
+    {
+        options.Configuration = redisConn;
+    });
+
+    builder.Services.AddSingleton<IConnectionMultiplexer>(sp => ConnectionMultiplexer.Connect(redisConn));
+}
+
+// OpenTelemetry tracing
+builder.Services.AddOpenTelemetryTracing(tracerProviderBuilder =>
+{
+    tracerProviderBuilder
+        .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("Yuksi.WebAPI"))
+        .AddAspNetCoreInstrumentation()
+        .AddHttpClientInstrumentation()
+        .AddConsoleExporter();
+});
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

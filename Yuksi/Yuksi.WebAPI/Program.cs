@@ -1,5 +1,7 @@
 using DefaultCorsPolicyNugetPackage;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Hangfire;
+using Hangfire.PostgreSql;
 using Microsoft.OpenApi;
 using System.Text.Json;
 using System.Threading.RateLimiting;
@@ -41,6 +43,12 @@ builder.Services.AddRateLimiter(options =>
 });
 
 builder.Services.AddHealthChecks();
+var hangfireConn = builder.Configuration.GetConnectionString("DefaultConnection");
+if (!string.IsNullOrEmpty(hangfireConn))
+{
+    builder.Services.AddHangfire(config => config.UsePostgreSqlStorage(hangfireConn));
+    builder.Services.AddHangfireServer();
+}
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -77,7 +85,7 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger(options =>
     {
@@ -113,6 +121,11 @@ app.MapHealthChecks("/health", new HealthCheckOptions
 });
 
 app.MapControllers();
+
+if (!string.IsNullOrEmpty(hangfireConn))
+{
+    app.UseHangfireDashboard("/hangfire");
+}
 
 ExtensionsMiddleware.CreateFirstUser(app);
 
